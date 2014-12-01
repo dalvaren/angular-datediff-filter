@@ -1,6 +1,6 @@
 angular.module('dateDiff', [])
     .filter('dateDiff', function() {
-        return function(input) {
+        return function(input, i18n) {
             //Check if have connection
             if(input.length > 1){
                 var d1 = input[0].departure.waypoint.schedule.date.split('-'),
@@ -22,16 +22,16 @@ angular.module('dateDiff', [])
             var days = Math.floor(delta / 86400);
             delta -= days * 86400;
             if(days){
-                txDate += days+'d';
+                txDate += days+i18n.get().common.abbreviated_days;
             }
             var hours = Math.floor(delta / 3600) % 24;
             delta -= hours * 3600;
             if(hours) {
-                txDate += (days?', ':'') + hours + 'h';
+                txDate += (days?', ':'') + hours + i18n.get().common.abbreviated_hour;
             }
             var minutes = Math.floor(delta / 60) % 60;
             if(minutes){
-                txDate += (minutes?' e ':'') + minutes+'m';
+                txDate += (minutes?' ' + i18n.get().common.and + ' ':'') + minutes+ i18n.get().common.abbreviated_minutes;
             }
             return txDate;
         };
