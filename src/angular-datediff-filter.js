@@ -30,8 +30,12 @@ angular.module('dateDiff', [])
                 txDate += (days?', ':'') + hours + i18n.get().common.abbreviated_hour;
             }
             var minutes = Math.floor(delta / 60) % 60;
+            var hoursAndMinutes = '';
+            if(hours && minutes) {
+                hoursAndMinutes =  i18n.get().common.and;
+            }
             if(minutes){
-                txDate += (minutes?' ' + i18n.get().common.and + ' ':'') + minutes+ i18n.get().common.abbreviated_minutes;
+                txDate += (minutes?' ' + hoursAndMinutes + ' ':'') + minutes+ i18n.get().common.abbreviated_minutes;
             }
             return txDate;
         };
